@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>670</width>
+    <height>400</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>670</width>
+    <height>400</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>670</width>
+    <height>400</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">/* ============================== */
+/* BACKGROUND FORM (Putih bersih) */
+QWidget {
+    background-color: white;
+}
+
+/* ============================== */
+/* DEFAULT STYLE UNTUK SEMUA QPushButton */
+QPushButton {
+    font-weight: bold;
+    border: 1px solid #1a5fb4;
+    border-radius: 6px;
+    padding: 6px 12px;
+    background-color: #ffffff;
+    color: #1a5fb4;
+}
+QPushButton:hover {
+    background-color: #e6f0ff;
+}
+QPushButton:pressed {
+    background-color: #cce0ff;
+}
+
+/* ============================== */
+/* TOMBOL KHUSUS RGB (DIATUR BERDASARKAN objectName) */
+
+/* Red */
+QPushButton#btn_hr {
+    background-color: #E53935;
+    color: white;
+}
+QPushButton#btn_hr:hover {
+    background-color: #D32F2F;
+}
+QPushButton#btn_hr:pressed {
+    background-color: #B71C1C;
+}
+
+/* Green */
+QPushButton#btn_hg {
+    background-color: #43A047;
+    color: white;
+}
+QPushButton#btn_hg:hover {
+    background-color: #388E3C;
+}
+QPushButton#btn_hg:pressed {
+    background-color: #1B5E20;
+}
+
+/* Blue */
+QPushButton#btn_hb {
+    background-color: #1E88E5;
+    color: white;
+}
+QPushButton#btn_hb:hover {
+    background-color: #1976D2;
+}
+QPushButton#btn_hb:pressed {
+    background-color: #0D47A1;
+}
+
+/* ============================== */
+/* QLabel untuk Preview Gambar */
+QLabel#label_preview {
+    border: 1px solid #999999;
+    background-color: #fdfdfd;
+}
+
+/* ============================== */
+/* QFrame untuk Plot Histogram */
+QFrame {
+    border: 1px solid #cccccc;
+    background-color: #f8f8f8;
+    border-radius: 4px;
+}
+</string>
+  </property>
+  <widget class="QLabel" name="label_preview">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>10</y>
+     <width>180</width>
+     <height>120</height>
+    </rect>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>0</width>
+     <height>0</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>180</width>
+     <height>120</height>
+    </size>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::Box</enum>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Plain</enum>
+   </property>
+   <property name="text">
+    <string>Gambar</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btn_load">
+   <property name="geometry">
+    <rect>
+     <x>70</x>
+     <y>150</y>
+     <width>100</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>100</width>
+     <height>30</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>100</width>
+     <height>30</height>
+    </size>
+   </property>
+   <property name="text">
+    <string>Load Gambar</string>
+   </property>
+  </widget>
+  <widget class="QWidget" name="">
+   <property name="geometry">
+    <rect>
+     <x>230</x>
+     <y>270</y>
+     <width>409</width>
+     <height>122</height>
+    </rect>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout_3">
+    <item>
+     <widget class="QPushButton" name="btn_hb">
+      <property name="minimumSize">
+       <size>
+        <width>40</width>
+        <height>25</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>40</width>
+        <height>25</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>HB</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QFrame" name="frame_b">
+      <property name="minimumSize">
+       <size>
+        <width>360</width>
+        <height>120</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>360</width>
+        <height>120</height>
+       </size>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::Box</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_4"/>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWidget" name="">
+   <property name="geometry">
+    <rect>
+     <x>230</x>
+     <y>140</y>
+     <width>409</width>
+     <height>122</height>
+    </rect>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout_2">
+    <item>
+     <widget class="QPushButton" name="btn_hg">
+      <property name="minimumSize">
+       <size>
+        <width>40</width>
+        <height>25</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>40</width>
+        <height>25</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>HG</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QFrame" name="frame_g">
+      <property name="minimumSize">
+       <size>
+        <width>360</width>
+        <height>120</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>360</width>
+        <height>120</height>
+       </size>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::Box</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_3"/>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWidget" name="">
+   <property name="geometry">
+    <rect>
+     <x>230</x>
+     <y>10</y>
+     <width>409</width>
+     <height>122</height>
+    </rect>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <item>
+     <widget class="QPushButton" name="btn_hr">
+      <property name="minimumSize">
+       <size>
+        <width>40</width>
+        <height>25</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>40</width>
+        <height>25</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>HR</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QFrame" name="frame_r">
+      <property name="minimumSize">
+       <size>
+        <width>360</width>
+        <height>120</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>360</width>
+        <height>120</height>
+       </size>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::Box</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_2"/>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QPushButton" name="btn_toggle_mode">
+   <property name="geometry">
+    <rect>
+     <x>70</x>
+     <y>190</y>
+     <width>100</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>100</width>
+     <height>30</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>100</width>
+     <height>30</height>
+    </size>
+   </property>
+   <property name="text">
+    <string>Manual</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
