@@ -178,10 +178,10 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Praktikum 10"))
+        Form.setWindowTitle(_translate("Form", "Praktikum 10 - Muhammad Irfan Tam Tomo"))
         self.label_preview.setText(_translate("Form", "Gambar"))
-        self.btn_load.setText(_translate("Form", "Load Gambar"))
+        self.btn_load.setText(_translate("Form", "Load"))
         self.btn_hb.setText(_translate("Form", "HB"))
         self.btn_hg.setText(_translate("Form", "HG"))
         self.btn_hr.setText(_translate("Form", "HR"))
-        self.btn_toggle_mode.setText(_translate("Form", "Fundamental"))
+        self.btn_toggle_mode.setText(_translate("Form", "Filled"))
