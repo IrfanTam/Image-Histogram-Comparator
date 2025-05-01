@@ -14,39 +14,51 @@ class HistogramCanvas(FigureCanvas):
         super().__init__(self.fig)
         self.setParent(parent)
 
-    def plot_histogram_manual(self, channel_data, color):
+    def plot_histogram_manual_line(self, channel_data, color):
+        """Menampilkan histogram channel dalam bentuk garis manual"""
         self.ax.clear()
-        hist = [0] * 256
+        hist = np.zeros(256, dtype=np.uint32)
         height, width = channel_data.shape
+
         for y in range(height):
             for x in range(width):
                 intensity = channel_data[y, x]
                 hist[intensity] += 1
-        hmax = max(hist)
-        if hmax > 0:
-            hist_norm = [h / hmax for h in hist]
-        else:
-            hist_norm = hist
-        for i in range(256):
-            self.ax.plot([i, i], [0, hist_norm[i]], color=color)
-        self.ax.set_xlim([0, 256])
-        self.ax.set_ylim([0, 1])
-        self.draw()
-        print_histogram_info(hist, color, "Manual")
 
-    def plot_histogram_opencv(self, channel_data, color):
-        self.ax.clear()
-        hist = cv2.calcHist([channel_data], [0], None, [256], [0, 256]).flatten()
-        hmax = max(hist)
-        if hmax > 0:
-            norm_hist = hist / hmax
-        else:
-            norm_hist = hist
-        self.ax.plot(norm_hist, color=color)
+        hmax = np.max(hist) if np.max(hist) > 0 else 1
+        hist = hist / hmax  # Normalisasi
+
+        x_vals = np.arange(256)
+        self.ax.plot(x_vals, hist, color=color)
         self.ax.set_xlim([0, 256])
         self.ax.set_ylim([0, 1])
         self.draw()
-        print_histogram_info(hist, color, "OpenCV")
+
+        print_histogram_info(hist * hmax, color, "Manual-Line")
+
+
+    def plot_histogram_manual_filled(self, channel_data, color):
+        """Menampilkan histogram channel dalam bentuk area terisi"""
+        self.ax.clear()
+        hist = np.zeros(256, dtype=np.uint32)
+        height, width = channel_data.shape
+
+        for y in range(height):
+            for x in range(width):
+                intensity = channel_data[y, x]
+                hist[intensity] += 1
+
+        hmax = np.max(hist) if np.max(hist) > 0 else 1
+        hist = hist / hmax  # Normalisasi
+
+        x_vals = np.arange(256)
+        self.ax.fill_between(x_vals, 0, hist, color=color, alpha=0.7)
+        self.ax.set_xlim([0, 256])
+        self.ax.set_ylim([0, 1])
+        self.draw()
+
+        print_histogram_info(hist * hmax, color, "Manual-Filled")
+
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -75,10 +87,10 @@ class MainWindow(QMainWindow):
     def toggle_mode(self):
         if self.current_mode == "Manual":
             self.current_mode = "OpenCV"
-            self.ui.btn_toggle_mode.setText("Optimized")
+            self.ui.btn_toggle_mode.setText("Line")
         else:
             self.current_mode = "Manual"
-            self.ui.btn_toggle_mode.setText("Fundamental")
+            self.ui.btn_toggle_mode.setText("Filled")
 
         if self.image is not None:
             self.plot_red()
@@ -104,25 +116,27 @@ class MainWindow(QMainWindow):
         if self.image is not None:
             r_channel = self.image[:, :, 2]
             if self.current_mode == "Manual":
-                self.canvas_r.plot_histogram_manual(r_channel, 'red')
+                self.canvas_r.plot_histogram_manual_line(r_channel, 'red')
             else:
-                self.canvas_r.plot_histogram_opencv(r_channel, 'red')
+                self.canvas_r.plot_histogram_manual_filled(r_channel, 'red')
+
 
     def plot_green(self):
         if self.image is not None:
             g_channel = self.image[:, :, 1]
             if self.current_mode == "Manual":
-                self.canvas_g.plot_histogram_manual(g_channel, 'green')
+                self.canvas_g.plot_histogram_manual_line(g_channel, 'green')
             else:
-                self.canvas_g.plot_histogram_opencv(g_channel, 'green')
+                self.canvas_g.plot_histogram_manual_filled(g_channel, 'green')
+
 
     def plot_blue(self):
         if self.image is not None:
             b_channel = self.image[:, :, 0]
             if self.current_mode == "Manual":
-                self.canvas_b.plot_histogram_manual(b_channel, 'blue')
+                self.canvas_b.plot_histogram_manual_line(b_channel, 'blue')
             else:
-                self.canvas_b.plot_histogram_opencv(b_channel, 'blue')
+                self.canvas_b.plot_histogram_manual_filled(b_channel, 'blue')
 
 def print_histogram_info(hist, label, mode):
     peak = int(np.argmax(hist))
